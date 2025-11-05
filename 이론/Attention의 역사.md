@@ -35,6 +35,7 @@ $$
 $$
 현재 단어 = f(이전\ 상태, 이전\ 단어, 현재\ 컨텍스트\ 정보)
 $$
+
 ## $C_i$ 계산하기
 $$
 c_i = \sum_{j=1}^{T_x} \alpha_{ij} h_j
@@ -57,6 +58,7 @@ $$
     0 & \text{if } i = 0
 \end{cases}
 $$
+
 $$
 \begin{align*}
 \vec{\underline{h}}_i &= \tanh \left( \vec{W} Ex_i + \vec{U} \left[ \vec{r}_i \circ \vec{h}_{i-1} \right] \right) \\
@@ -64,11 +66,14 @@ $$
 \vec{r}_i &= \sigma \left( \vec{W}_r Ex_i + \vec{U}_r \vec{h}_{i-1} \right).
 \end{align*}
 $$
+
 - 복잡한데 사실 그냥 LSTM레이어 지나간다는 수식인
 	- LSTM은 그냥 RNN의 기울기 소실 문제를 해결하기 위해서 장기 메모리와 단기 메모리를 만들어서 이용하겠다는 신경망 구조임
+
 $$
 h_j = [\overrightarrow{h_j}; \overleftarrow{h_j}]
 $$
+
 - 이해하기 쉽게 
 
 - 왼쪽부터 현재 위치 j까지 히든스테이트를 LSTM을 거쳐서 계산한 값 과
@@ -76,17 +81,21 @@ $$
 	- 그냥 두 벡터은 하나의 백터로 만듬(뒤에 붙인다)
 
 ### $a_{ij}$ 계산하기
+
 $$
 \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})},
 $$
+
 => 해석하면 1부터 $T_x$까지  i에 대한 각 j번쨰 단어의 $e_{ij}$에 대한 소프트맥스 값
 - i는 출력 문장에서 단어 위치 , j는 입력 문장에서 단어 위치
 - 즉, 현재 예측하려는 출력 문장에서 i번째 단어에 대해 모든 입력 문장의 단어의 $e_{ij}$의 값들에 대하여 소프트맥스를 취하겠다.
 ### $e_{ij}$ 계산하기 aka. score
 - i번째 문자에 대한 j번째 문자와 관계 점수
+
 $$
 e_{ij} = a(s_{i-1}, h_j)
 $$
+
 - 논문에서 위치 j 주변의 입력과 위치 i에서의 출력이 얼마나 잘 일치하는지 점수
 - a를 이를 계산하는 alignment 모델이라고 함
 $$
@@ -97,6 +106,7 @@ W_{a} \in \mathbb{R}^{n' \times n}\\
 U_{a} \in \mathbb{R}^{n' \times 2n}\\
 \end{gather*}
 $$
+
 $\{(n'*n) \times (n*1)\} + \{(n' * 2n) \times (2n*1)\} = n' * 1$
 ${(n'*1)}^T \times n'*1 = (1 * n') \times n' * 1 = R$
 - 이때 계산되는 실수 값이 입력 문장의 j번쨰 단어와 출력단어 i의 관계를 나타내는 점수
