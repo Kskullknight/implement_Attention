@@ -108,9 +108,13 @@ U_{a} \in \mathbb{R}^{n' \times 2n}\\
 \end{gather*}
 $$
 
-$ \{(n'*n) \times (n*1)\} + \{(n' * 2n) \times (2n*1)\} = n' * 1$
+$$
+\{(n'*n) \times (n*1)\} + \{(n' * 2n) \times (2n*1)\} = n' * 1
+$$
 
-${(n'*1)}^T \times n'*1 = (1 * n') \times n' * 1 = R$
+$$
+{(n'*1)}^T \times n'*1 = (1 * n') \times n' * 1 = R
+$$
 - 이때 계산되는 실수 값이 입력 문장의 j번쨰 단어와 출력단어 i의 관계를 나타내는 점수
 
 ## 다시 $C_i$계산하기
