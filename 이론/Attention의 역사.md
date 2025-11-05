@@ -15,10 +15,11 @@
 - Dzmitry Bahdanau가 쓴 'Neural Machine Translation by Jointly Learning to Align and Translate' 논문에 등장
 	- 여기 공동 저자가 조경현 교수님,  요슈아 벤지오(Yoshua Bengio)
 ## 핵심 원리
+
 $$
 p(y_i|y_1, \dots, y_{i-1}, \mathbf{x}) = g(y_{i-1}, \mathbf{s}_i, c_i),
 $$
-=>
+
 - 이전에 생성된 단어와 전체 문장 X에 대하여 $y_i$번쨰 단어가 나올 조건부 확률
 	- 기존의 인코더 디코더 모델은 전체를 보지 않고 인코더의 출력값과 이전 단어의 히든 스테이트만 보았음
 	
@@ -26,9 +27,11 @@ $$
 	- $y_{i-1}$는 이전 단어
 	- $s_i$은 $i$번쨰 시점에서 의 RNN의 히든 상태
 	- $c_i$는 i번째 단어를 생성하기 위해서 사용되는 컨텍스트 정보
+
 $$
 s_i = f(s_{i-1}, y_{i-1}, c_i)
 $$
+
 $$
 현재 단어 = f(이전\ 상태, 이전\ 단어, 현재\ 컨텍스트\ 정보)
 $$
