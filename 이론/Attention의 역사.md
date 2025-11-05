@@ -1,6 +1,6 @@
 - Attention은 NMT(Neural Machine Translation: 신경망 기계 번역) 분야에서 처음 등장한 이론이다.
 - 아래 구조를 Attention Mechanism이라고 한다
-
+![Html image tag](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FmzBvQ%2FbtrlTVLkN1b%2FAAAAAAAAAAAAAAAAAAAAAAH9c_Pbh80OPtvh8ZWH7bi4HTKZoqDVnWe0VjFzWoNp%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1764514799%26allow_ip%3D%26allow_referer%3D%26signature%3DzJYskEbk3Vbgl2MlMaHX5A2Ko0U%253D)
 - Attention은 일종의 방법론이고 이를 구현하는 다양한 방법이 존재한다
 	- 15개 이상의 Attention구현 논문이 있음
 
@@ -12,8 +12,10 @@
 > 그래서 디코더에서 문장을 생성할 때 입력 문장의 전체 컨텍스트가 온전하게 전달 될 수 있도록 하는 방법을 고안함
 
 # 최초의 Attention: Bahdanau Attention
+~~진짜 최초는 아니고 Attention이라는 개념을 최초 모델에 적용시킨 걸로 암~~
 - Dzmitry Bahdanau가 쓴 'Neural Machine Translation by Jointly Learning to Align and Translate' 논문에 등장
 	- 여기 공동 저자가 조경현 교수님,  요슈아 벤지오(Yoshua Bengio)
+![Html image tag](https://blog.kakaocdn.net/dna/cNcsQd/btrl4RHOz6b/AAAAAAAAAAAAAAAAAAAAALr-3q2Mz3WMQRXvchyA2J6Fg6JfLw_mzY2RFMuSxvkl/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1764514799&allow_ip=&allow_referer=&signature=ohgxF6Xjtmp8onyx8jOFx2xxysQ%3D)
 ## 핵심 원리
 
 $$
@@ -129,3 +131,20 @@ $$
 # 다음 단어 예측하기
 - $g(y_{i-1}, s_i , c_i)$의 결과가 다음 단어를 나타내는 벡터임
 	- g는 다층 신경망임
+
+&nbsp;
+# 바흐나우 어텐션의 한계
+#### 여전히 RNN구조에서 벗어나지 못했음
+- RNN구조는 순차적 계산을 하기 때문에 계산시간이 오래 걸림
+	- 문장이 길어질 수록 $\overleftarrow{h}, \overrightarrow{h}$의 값을 계산하는데 오래 걸림
+- 여전히 RNN구조로 인한 정보 손실이 발생함
+	- 문장이 길어질 수록 $\overleftarrow{h}, \overrightarrow{h}$에서 거리간 먼 값의 영향이 약해지거나 사라짐
+		- 기울기 소실 문제
+#  Luong Attention (aka. Dot-Product )Attention 
+![Html image tag](https://blog.kakaocdn.net/dna/WK1v5/btrq34cou79/AAAAAAAAAAAAAAAAAAAAAPbzDlMY9SxaPgmmDd8eDWYOyPx0KzCwwvlnbR4pFEv6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1764514799&allow_ip=&allow_referer=&signature=3sFBWJOhT%2Buimk2vz3%2FZSMcAAwA%3D)
+- RNN구조의 에텐션에서 벗어난 Attention 구조를 제안함
+- Attention 점수($e_{ij}$)를 계산하는 방법 3가지를 제안함 (위 바흐나우의 e값)
+	- dot  $s_{t}^{T}H$ 
+	- general $s_{t}^{T}W_a H$
+	- concat $v_{a}^{T} tanh(W_a [h_{t} ; H])$
+> 우리가 관심있는건 dot-product를 이용하여 RNN구조에서 벗어나 Attention score를 계산할 수 있다는 점임
