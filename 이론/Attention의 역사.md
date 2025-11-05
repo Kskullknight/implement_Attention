@@ -98,6 +98,7 @@ $$
 
 - 논문에서 위치 j 주변의 입력과 위치 i에서의 출력이 얼마나 잘 일치하는지 점수
 - a를 이를 계산하는 alignment 모델이라고 함
+
 $$
 \begin{gather*} 
 e_{ij} = v_a^\top \tanh(W_a s_{i-1} + U_a h_j) \\
