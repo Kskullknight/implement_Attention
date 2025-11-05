@@ -109,7 +109,7 @@ U_{a} \in \mathbb{R}^{n' \times 2n}\\
 $$
 
 $$
-(n'*n) \times (n*1) + (n' * 2n) \times (2n*1) = n' * 1
+(n' * n) \times (n * 1) + (n' * 2n) \times (2n*1) = n' * 1
 $$
 
 $$
